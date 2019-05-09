@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28307.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem", "ZENSURE.Logsystem\ZENSURE.Logsystem.csproj", "{7C89022A-9349-4B4C-94A0-9BC3C01ADC0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem.Test", "ZENSURE.Logsystem.Test\ZENSURE.Logsystem.Test.csproj", "{D72EF2CB-BA69-4DB3-9B0D-79A28C1C4FC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem.Framework.Test", "ZENSURE.Logsystem.Framework.Test\ZENSURE.Logsystem.Framework.Test.csproj", "{FCAFC762-EEE3-4A43-8D8D-13CC8A9FD750}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{7C89022A-9349-4B4C-94A0-9BC3C01ADC0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C89022A-9349-4B4C-94A0-9BC3C01ADC0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C89022A-9349-4B4C-94A0-9BC3C01ADC0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D72EF2CB-BA69-4DB3-9B0D-79A28C1C4FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D72EF2CB-BA69-4DB3-9B0D-79A28C1C4FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D72EF2CB-BA69-4DB3-9B0D-79A28C1C4FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D72EF2CB-BA69-4DB3-9B0D-79A28C1C4FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCAFC762-EEE3-4A43-8D8D-13CC8A9FD750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCAFC762-EEE3-4A43-8D8D-13CC8A9FD750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCAFC762-EEE3-4A43-8D8D-13CC8A9FD750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCAFC762-EEE3-4A43-8D8D-13CC8A9FD750}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
