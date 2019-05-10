@@ -9,8 +9,9 @@ namespace ZENSURE.Logsystem.Framework.Test
         [TestMethod]
         public void TestMethod1()
         {
-            Class1 class1 = new Class1();
-            Assert.AreEqual(200, class1.A().Code);
+            string url = "http://192.168.2.115:23649/api/values";
+           
+            Assert.AreEqual(200, HttpSingleton.Instance.Get(url));
         }
     }
 }

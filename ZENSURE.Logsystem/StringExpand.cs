@@ -21,5 +21,18 @@ namespace ZENSURE.Logsystem
             }
 
         }
+
+        public static T ToJson<T>(this string input) where T : class
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(input);
+            }
+            catch
+            {
+                return default(T);
+            }
+
+        }
     }
 }
