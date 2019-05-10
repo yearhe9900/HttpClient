@@ -17,9 +17,6 @@ namespace ZENSURE.Logsystem
             HttpResponseMessage response = httpClient.GetAsync(new Uri(url)).Result;
             var result = response.Content.ReadAsStringAsync().Result.ToData<ResponseResultBaseModel>();
 
-            HttpResponseMessage response2 = httpClient.GetAsync(new Uri(url)).Result;
-            var result2 = response2.Content.ReadAsStringAsync().Result.ToData<ResponseResultBaseModel>();
-
             return result;
         }
     }
