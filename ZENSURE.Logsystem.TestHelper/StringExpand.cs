@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ZENSURE.Logsystem
@@ -19,20 +20,25 @@ namespace ZENSURE.Logsystem
             {
                 return default(T);
             }
-
         }
 
-        public static T ToJson<T>(this string input) where T : class
+        /// <summary>
+        /// Determine whether a string is a URL
+        /// </summary>
+        /// <param name="url">Url String</param>
+        /// <returns></returns>
+        public static bool IsUrl(string url)
         {
             try
             {
-                return JsonConvert.DeserializeObject<T>(input);
+                string urlMatch = @"[a-zA-z]+://[^\s]*";
+      
+                return Regex.IsMatch(url, urlMatch);
             }
-            catch
+            catch (Exception ex)
             {
-                return default(T);
+                throw ex;
             }
-
         }
     }
 }

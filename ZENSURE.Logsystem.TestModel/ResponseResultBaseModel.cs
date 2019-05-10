@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZENSURE.Logsystem.Model
+namespace ZENSURE.Logsystem.TestModel
 {
     public class ResponseResultBaseModel
     {

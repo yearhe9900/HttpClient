@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem", "ZENSURE.Logsystem\ZENSURE.Logsystem.csproj", "{7C89022A-9349-4B4C-94A0-9BC3C01ADC0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZENSURE.Logsystem", "ZENSURE.Logsystem\ZENSURE.Logsystem.csproj", "{7C89022A-9349-4B4C-94A0-9BC3C01ADC0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem.Test", "ZENSURE.Logsystem.Test\ZENSURE.Logsystem.Test.csproj", "{D72EF2CB-BA69-4DB3-9B0D-79A28C1C4FC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZENSURE.Logsystem.Test", "ZENSURE.Logsystem.Test\ZENSURE.Logsystem.Test.csproj", "{D72EF2CB-BA69-4DB3-9B0D-79A28C1C4FC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem.Framework.Test", "ZENSURE.Logsystem.Framework.Test\ZENSURE.Logsystem.Framework.Test.csproj", "{FCAFC762-EEE3-4A43-8D8D-13CC8A9FD750}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem.TestModel", "ZENSURE.Logsystem.TestModel\ZENSURE.Logsystem.TestModel.csproj", "{B76F5BE0-B6F9-4C6F-951C-5FB5530E692B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem.TestHelper", "ZENSURE.Logsystem.TestHelper\ZENSURE.Logsystem.TestHelper.csproj", "{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +25,14 @@ Global
 		{D72EF2CB-BA69-4DB3-9B0D-79A28C1C4FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D72EF2CB-BA69-4DB3-9B0D-79A28C1C4FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D72EF2CB-BA69-4DB3-9B0D-79A28C1C4FC4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FCAFC762-EEE3-4A43-8D8D-13CC8A9FD750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCAFC762-EEE3-4A43-8D8D-13CC8A9FD750}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCAFC762-EEE3-4A43-8D8D-13CC8A9FD750}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCAFC762-EEE3-4A43-8D8D-13CC8A9FD750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B76F5BE0-B6F9-4C6F-951C-5FB5530E692B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B76F5BE0-B6F9-4C6F-951C-5FB5530E692B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B76F5BE0-B6F9-4C6F-951C-5FB5530E692B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B76F5BE0-B6F9-4C6F-951C-5FB5530E692B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
