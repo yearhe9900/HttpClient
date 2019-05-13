@@ -14,7 +14,7 @@ namespace ZENSURE.Logsystem.Utils
         /// <returns></returns>
         public static long GetUnixTimeStampByDatetime(DateTime dateTime)
         {
-            var epoch = (dateTime.Ticks - 621355968000000000) / 10000000;//时间转Unix时间戳
+            var epoch = (dateTime.Ticks - 621355968000000000) / 10000000;//Datetime To Unix
             return epoch;
         }
     }

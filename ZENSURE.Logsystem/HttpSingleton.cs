@@ -6,6 +6,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
+using ZENSURE.Logsystem.Model;
+using Newtonsoft.Json;
+using ZENSURE.LogSystem.Model;
 
 namespace ZENSURE.Logsystem
 {
@@ -32,7 +35,8 @@ namespace ZENSURE.Logsystem
         /// GET Request
         /// </summary>
         /// <param name="url">Request Url String</param>
-        /// <returns>(result:Is legal result,errorMsg:If there are errors,the error msg is returned)</returns>
+        /// <param name="headers">Request Headers</param>
+        /// <returns>(result:Is legal result,code:HttpStatusCode,errorMsg:If there are errors,the error msg is returned)</returns>
         public (string result, HttpStatusCode code, string errorMsg) Get(string url, Dictionary<string, string> headers = null)
         {
             var (result, errorMsg) = CheckParameters(url);
@@ -41,7 +45,7 @@ namespace ZENSURE.Logsystem
                 DefaultRequestHeadersAdd(headers);
                 using (HttpResponseMessage response = _httpClient.GetAsync(new Uri(url)).Result)
                 {
-                    DefaultRequestHeadersRemove(headers);
+                    DefaultRequestHeadersClear(headers);
                     return GetResponseResult(response);
                 }
             }
@@ -53,7 +57,10 @@ namespace ZENSURE.Logsystem
         /// </summary>
         /// <param name="url">Request Url String</param>
         /// <param name="postData">Request Post Data</param>
-        /// <returns>(result:Is legal result,errorMsg:If there are errors,the error msg is returned)</returns>
+        /// <param name="headers">Request Headers</param>
+        /// <param name="contentType">Request Content Type</param>
+        /// <param name="timeOut">Request Time Out</param>
+        /// <returns>(result:Is legal result,code:HttpStatusCode,errorMsg:If there are errors,the error msg is returned)</returns>
         public (string result, HttpStatusCode code, string errorMsg) Post(string url, string postData = null, Dictionary<string, string> headers = null, string contentType = null, int timeOut = 0)
         {
             var (result, errorMsg) = CheckParameters(url);
@@ -69,7 +76,7 @@ namespace ZENSURE.Logsystem
                     httpContent.Headers.ContentType = new MediaTypeHeaderValue(string.IsNullOrWhiteSpace(contentType) ? ContentTypeConst.JSON : contentType);
                     using (HttpResponseMessage response = _httpClient.PostAsync(url, httpContent).Result)
                     {
-                        DefaultRequestHeadersRemove(headers);
+                        DefaultRequestHeadersClear(headers);
                         return GetResponseResult(response);
                     }
                 }
@@ -77,10 +84,40 @@ namespace ZENSURE.Logsystem
             return (string.Empty, HttpStatusCode.BadRequest, errorMsg);
         }
 
-        #region 私有方法
+        /// <summary>
+        /// Post Send System Log
+        /// </summary>
+        /// <param name="url">Request Url String</param>
+        /// <param name="model">Request Post Data</param>
+        /// <param name="headers">Request Headers</param>
+        /// <param name="contentType">Request Content Type</param>
+        /// <param name="timeOut">Request Time Out</param>
+        /// <returns>(result:Is legal result,code:HttpStatusCode,errorMsg:If there are errors,the error msg is returned)</returns>
+        /// <returns></returns>
+        public (string result, HttpStatusCode code, string errorMsg) PostSendSystemLog(string url, SystemLogModel model, Dictionary<string, string> headers = null, string contentType = null, int timeOut = 0)
+        {
+            return Post(url, JsonConvert.SerializeObject(model ?? new SystemLogModel()), headers, contentType, timeOut);
+        }
 
         /// <summary>
-        /// 添加默认Headers
+        /// Post Send Interface Log
+        /// </summary>
+        /// <param name="url">Request Url String</param>
+        /// <param name="model">Request Post Data</param>
+        /// <param name="headers">Request Headers</param>
+        /// <param name="contentType">Request Content Type</param>
+        /// <param name="timeOut">Request Time Out</param>
+        /// <returns>(result:Is legal result,code:HttpStatusCode,errorMsg:If there are errors,the error msg is returned)</returns>
+        /// <returns></returns>
+        public (string result, HttpStatusCode code, string errorMsg) PostSendInterfaceLog(string url, InterfaceLogModel model, Dictionary<string, string> headers = null, string contentType = null, int timeOut = 0)
+        {
+            return Post(url, JsonConvert.SerializeObject(model ?? new InterfaceLogModel()), headers, contentType, timeOut);
+        }
+
+        #region Privite Function
+
+        /// <summary>
+        /// Add Default Headers
         /// </summary>
         /// <param name="headers"></param>
         private void DefaultRequestHeadersAdd(Dictionary<string, string> headers = null)
@@ -95,10 +132,10 @@ namespace ZENSURE.Logsystem
         }
 
         /// <summary>
-        ///// 移除默认Headers
+        ///// Clear Default Headers
         /// </summary>
         /// <param name="headers"></param>
-        private void DefaultRequestHeadersRemove(Dictionary<string, string> headers = null)
+        private void DefaultRequestHeadersClear(Dictionary<string, string> headers = null)
         {
             //清空所有header内容
             _httpClient.DefaultRequestHeaders.Clear();

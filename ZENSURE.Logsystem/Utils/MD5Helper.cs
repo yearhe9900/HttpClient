@@ -10,7 +10,7 @@ namespace ZENSURE.Logsystem.Utils
     public class MD5Helper
     {
         /// <summary>
-        /// MD5 16位加密 加密后为大写
+        /// MD5_16
         /// </summary>
         /// <param name="ConvertString"></param>
         /// <returns></returns>
@@ -22,7 +22,7 @@ namespace ZENSURE.Logsystem.Utils
         }
 
         /// <summary>
-        /// MD5　32位加密
+        /// MD5_32
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>

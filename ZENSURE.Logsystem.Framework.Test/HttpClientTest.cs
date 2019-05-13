@@ -48,18 +48,6 @@ namespace ZENSURE.Logsystem.Framework.Test
         }
 
         /// <summary>
-        /// 多次GET测试
-        /// </summary>
-        [TestMethod]
-        public void TEST_HTTP_GET_MANY_UNTIMES_BY_UOTFOUND_URL()
-        {
-            for (int i = 0; i < 10000; i++)
-            {
-                Assert.AreEqual(HttpStatusCode.NotFound, HttpSingleton.Instance.Get(TestStaticString._getNotFoundUrl).code);
-            }
-        }
-
-        /// <summary>
         /// 单次POST测试
         /// </summary>
         [TestMethod]
