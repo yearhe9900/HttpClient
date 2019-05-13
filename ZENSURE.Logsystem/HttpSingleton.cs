@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Net.Http.Headers;
 
 namespace ZENSURE.Logsystem
 {
@@ -19,6 +20,7 @@ namespace ZENSURE.Logsystem
             {
                 MaxResponseContentBufferSize = 256000
             };
+            httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
             _httpClient = httpClient;
         }
 
@@ -31,13 +33,15 @@ namespace ZENSURE.Logsystem
         /// </summary>
         /// <param name="url">Request Url String</param>
         /// <returns>(result:Is legal result,errorMsg:If there are errors,the error msg is returned)</returns>
-        public (string result, HttpStatusCode code, string errorMsg) Get(string url)
+        public (string result, HttpStatusCode code, string errorMsg) Get(string url, Dictionary<string, string> headers = null)
         {
             var (result, errorMsg) = CheckParameters(url);
             if (result)
             {
+                DefaultRequestHeadersAdd(headers);
                 using (HttpResponseMessage response = _httpClient.GetAsync(new Uri(url)).Result)
                 {
+                    DefaultRequestHeadersRemove(headers);
                     return GetResponseResult(response);
                 }
             }
@@ -57,25 +61,57 @@ namespace ZENSURE.Logsystem
             {
                 using (HttpContent httpContent = new StringContent(postData, Encoding.UTF8))
                 {
-                    if (headers != null)
-                    {
-                        foreach (var header in headers)
-                        {
-                            _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
-                        }
-                    }
-                    else
-                    {
-                        _httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
-                    }
+                    DefaultRequestHeadersAdd(headers);
+
                     using (HttpResponseMessage response = _httpClient.PostAsync(url, httpContent).Result)
                     {
-                        httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(string.IsNullOrWhiteSpace(contentType) ? ContentTypeConst.JSON : contentType);
+                        httpContent.Headers.ContentType = new MediaTypeHeaderValue(string.IsNullOrWhiteSpace(contentType) ? ContentTypeConst.JSON : contentType);
+                        DefaultRequestHeadersRemove(headers);
                         return GetResponseResult(response);
                     }
                 }
             }
             return (string.Empty, HttpStatusCode.BadRequest, errorMsg);
+        }
+
+        #region 私有方法
+
+        /// <summary>
+        /// 添加默认Headers
+        /// </summary>
+        /// <param name="headers"></param>
+        private void DefaultRequestHeadersAdd(Dictionary<string, string> headers = null)
+        {
+            if (headers != null)
+            {
+                foreach (var header in headers)
+                {
+                    _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+                }
+            }
+        }
+
+        /// <summary>
+        ///// 移除默认Headers
+        /// </summary>
+        /// <param name="headers"></param>
+        private void DefaultRequestHeadersRemove(Dictionary<string, string> headers = null)
+        {
+            if (headers != null)
+            {
+                foreach (var header in headers)
+                {
+                    _httpClient.DefaultRequestHeaders.Remove(header.Key);
+                }
+            }
+
+            var userAgent = _httpClient.DefaultRequestHeaders.UserAgent;
+
+            if (userAgent.Count == 0)
+            {
+                //重新赋值user-agent
+                _httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
+            }
         }
 
         /// <summary>
@@ -114,5 +150,7 @@ namespace ZENSURE.Logsystem
                 return (string.Empty, response.StatusCode, response.StatusCode.ToString());
             }
         }
+
+        #endregion
     }
 }
