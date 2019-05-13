@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem.TestModel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem.TestHelper", "ZENSURE.Logsystem.TestHelper\ZENSURE.Logsystem.TestHelper.csproj", "{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem.Framework.Test", "ZENSURE.Logsystem.Framework.Test\ZENSURE.Logsystem.Framework.Test.csproj", "{73D2D661-5874-4E2A-A898-41F078396E6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73D2D661-5874-4E2A-A898-41F078396E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73D2D661-5874-4E2A-A898-41F078396E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73D2D661-5874-4E2A-A898-41F078396E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73D2D661-5874-4E2A-A898-41F078396E6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

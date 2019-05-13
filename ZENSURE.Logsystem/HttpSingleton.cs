@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -9,6 +11,7 @@ namespace ZENSURE.Logsystem
     public class HttpSingleton
     {
         private static HttpClient _httpClient = null;
+        private static List<string> _contentTypeList = null;
 
         private HttpSingleton()
         {
@@ -16,7 +19,6 @@ namespace ZENSURE.Logsystem
             {
                 MaxResponseContentBufferSize = 256000
             };
-            httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
             _httpClient = httpClient;
         }
 
@@ -46,19 +48,29 @@ namespace ZENSURE.Logsystem
         /// POST Request
         /// </summary>
         /// <param name="url">Request Url String</param>
-        /// <param name="json">Request Json Data</param>
+        /// <param name="postData">Request Post Data</param>
         /// <returns>(result:Is legal result,errorMsg:If there are errors,the error msg is returned)</returns>
-        public (string result, HttpStatusCode code, string errorMsg) Post(string url, string json, string header = null)
+        public (string result, HttpStatusCode code, string errorMsg) Post(string url, string postData = null, Dictionary<string, string> headers = null, string contentType = null, int timeOut = 30)
         {
             var (result, errorMsg) = CheckParameters(url);
             if (result)
             {
-                using (HttpContent httpContent = new StringContent(json))
+                using (HttpContent httpContent = new StringContent(postData, Encoding.UTF8))
                 {
-                    httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/josn");
-
+                    if (headers != null)
+                    {
+                        foreach (var header in headers)
+                        {
+                            _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+                        }
+                    }
+                    else
+                    {
+                        _httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
+                    }
                     using (HttpResponseMessage response = _httpClient.PostAsync(url, httpContent).Result)
                     {
+                        httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(string.IsNullOrWhiteSpace(contentType) ? ContentTypeConst.JSON : contentType);
                         return GetResponseResult(response);
                     }
                 }
