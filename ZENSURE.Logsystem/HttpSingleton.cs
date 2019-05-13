@@ -54,18 +54,21 @@ namespace ZENSURE.Logsystem
         /// <param name="url">Request Url String</param>
         /// <param name="postData">Request Post Data</param>
         /// <returns>(result:Is legal result,errorMsg:If there are errors,the error msg is returned)</returns>
-        public (string result, HttpStatusCode code, string errorMsg) Post(string url, string postData = null, Dictionary<string, string> headers = null, string contentType = null, int timeOut = 30)
+        public (string result, HttpStatusCode code, string errorMsg) Post(string url, string postData = null, Dictionary<string, string> headers = null, string contentType = null, int timeOut = 0)
         {
             var (result, errorMsg) = CheckParameters(url);
             if (result)
             {
+                if (timeOut > 0)
+                {
+                    _httpClient.Timeout = new TimeSpan(0, 0, timeOut);
+                }
                 using (HttpContent httpContent = new StringContent(postData, Encoding.UTF8))
                 {
                     DefaultRequestHeadersAdd(headers);
-
+                    httpContent.Headers.ContentType = new MediaTypeHeaderValue(string.IsNullOrWhiteSpace(contentType) ? ContentTypeConst.JSON : contentType);
                     using (HttpResponseMessage response = _httpClient.PostAsync(url, httpContent).Result)
                     {
-                        httpContent.Headers.ContentType = new MediaTypeHeaderValue(string.IsNullOrWhiteSpace(contentType) ? ContentTypeConst.JSON : contentType);
                         DefaultRequestHeadersRemove(headers);
                         return GetResponseResult(response);
                     }
@@ -97,21 +100,11 @@ namespace ZENSURE.Logsystem
         /// <param name="headers"></param>
         private void DefaultRequestHeadersRemove(Dictionary<string, string> headers = null)
         {
-            if (headers != null)
-            {
-                foreach (var header in headers)
-                {
-                    _httpClient.DefaultRequestHeaders.Remove(header.Key);
-                }
-            }
+            //清空所有header内容
+            _httpClient.DefaultRequestHeaders.Clear();
 
-            var userAgent = _httpClient.DefaultRequestHeaders.UserAgent;
-
-            if (userAgent.Count == 0)
-            {
-                //重新赋值user-agent
-                _httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
-            }
+            //重新赋值user-agent
+            _httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
         }
 
         /// <summary>
