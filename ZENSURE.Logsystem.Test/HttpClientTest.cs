@@ -19,7 +19,7 @@ namespace ZENSURE.Logsystem.Test
             Assert.True(StringExpand.IsUrl(TestStaticString._getLegalUrl));
 
             Dictionary<string, string> headers = new Dictionary<string, string>() { };
-            headers.Add("Content-Type", "application/xml");
+
             headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
 
             Assert.Equal(HttpStatusCode.OK, HttpSingleton.Instance.Get(TestStaticString._getLegalUrl, headers).code);
@@ -34,7 +34,7 @@ namespace ZENSURE.Logsystem.Test
             Assert.True(StringExpand.IsUrl(TestStaticString._getLegalUrl));
 
             Dictionary<string, string> headers = new Dictionary<string, string>() { };
-            headers.Add("Content-Type", "application/xml");
+          
             headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
 
             for (int i = 0; i < 10000; i++)
@@ -118,7 +118,7 @@ namespace ZENSURE.Logsystem.Test
                 Level = LevelEnum.DEBUG,
                 Date = DateTime.Now,
                 Edition = "v1.1.1",
-                Message = "这是测试数据02"
+                Message = "这是测试数据2003"
             };
 
             Assert.Equal(HttpStatusCode.OK, HttpSingleton.Instance.PostSendSystemLog(TestStaticString._postLegalUrl, model, headers).code);
