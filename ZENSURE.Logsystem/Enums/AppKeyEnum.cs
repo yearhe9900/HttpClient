@@ -1,4 +1,4 @@
-﻿namespace ZENSURE.LogSystem.Enums
+﻿namespace ZENSURE.Logsystem.Enums
 {
     /// <summary>
     /// Client

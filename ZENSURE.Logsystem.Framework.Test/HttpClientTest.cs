@@ -4,7 +4,7 @@ using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ZENSURE.Logsystem.Model;
 using ZENSURE.Logsystem.TestModel;
-using ZENSURE.LogSystem.Enums;
+using ZENSURE.Logsystem.Enums;
 
 namespace ZENSURE.Logsystem.Framework.Test
 {
@@ -34,7 +34,7 @@ namespace ZENSURE.Logsystem.Framework.Test
           
             headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
 
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Assert.AreEqual(HttpStatusCode.OK, HttpSingleton.Instance.Get(TestStaticString._getLegalUrl, headers).code);
             }
@@ -82,7 +82,7 @@ namespace ZENSURE.Logsystem.Framework.Test
             headers.Add("Sign", sign);
             headers.Add("Timestamp", timestamp);
 
-            for (var i = 0; i < 10000; i++)
+            for (var i = 0; i < 10; i++)
             {
                 Assert.AreEqual(HttpStatusCode.OK, HttpSingleton.Instance.Post(TestStaticString._postLegalUrl, TestStaticString._jsonData, headers).code);
             }
@@ -105,10 +105,10 @@ namespace ZENSURE.Logsystem.Framework.Test
                 Level = LevelEnum.DEBUG,
                 Date = DateTime.Now,
                 Edition = "v1.1.1",
-                Message = "这是测试数据02"
+                Message = "这是测试数据2003"
             };
 
-            Assert.AreEqual(HttpStatusCode.OK, HttpSingleton.Instance.PostSendLog(TestStaticString._postLegalUrl, model,"zlead").code);
+            Assert.AreEqual(HttpStatusCode.OK, HttpSingleton.Instance.PostSendLog(TestStaticString._postLegalUrl, model).code);
         }
     }
 }

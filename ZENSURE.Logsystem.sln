@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZENSURE.Logsystem", "ZENSUR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZENSURE.Logsystem.Test", "ZENSURE.Logsystem.Test\ZENSURE.Logsystem.Test.csproj", "{D72EF2CB-BA69-4DB3-9B0D-79A28C1C4FC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem.TestModel", "ZENSURE.Logsystem.TestModel\ZENSURE.Logsystem.TestModel.csproj", "{B76F5BE0-B6F9-4C6F-951C-5FB5530E692B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZENSURE.Logsystem.TestModel", "ZENSURE.Logsystem.TestModel\ZENSURE.Logsystem.TestModel.csproj", "{B76F5BE0-B6F9-4C6F-951C-5FB5530E692B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem.TestHelper", "ZENSURE.Logsystem.TestHelper\ZENSURE.Logsystem.TestHelper.csproj", "{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZENSURE.Logsystem.TestHelper", "ZENSURE.Logsystem.TestHelper\ZENSURE.Logsystem.TestHelper.csproj", "{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem.Framework.Test", "ZENSURE.Logsystem.Framework.Test\ZENSURE.Logsystem.Framework.Test.csproj", "{73D2D661-5874-4E2A-A898-41F078396E6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZENSURE.Logsystem.Framework.Test", "ZENSURE.Logsystem.Framework.Test\ZENSURE.Logsystem.Framework.Test.csproj", "{E00F31EF-B337-4B6A-B807-83AFB23A789E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C792E6C-CF9D-4818-BBDE-71149AFC0BEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{73D2D661-5874-4E2A-A898-41F078396E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{73D2D661-5874-4E2A-A898-41F078396E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{73D2D661-5874-4E2A-A898-41F078396E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{73D2D661-5874-4E2A-A898-41F078396E6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E00F31EF-B337-4B6A-B807-83AFB23A789E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E00F31EF-B337-4B6A-B807-83AFB23A789E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E00F31EF-B337-4B6A-B807-83AFB23A789E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E00F31EF-B337-4B6A-B807-83AFB23A789E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

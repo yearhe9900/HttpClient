@@ -4,7 +4,7 @@ using System.Net;
 using Xunit;
 using ZENSURE.Logsystem.Model;
 using ZENSURE.Logsystem.TestModel;
-using ZENSURE.LogSystem.Enums;
+using ZENSURE.Logsystem.Enums;
 
 namespace ZENSURE.Logsystem.Test
 {
@@ -34,10 +34,10 @@ namespace ZENSURE.Logsystem.Test
             Assert.True(StringExpand.IsUrl(TestStaticString._getLegalUrl));
 
             Dictionary<string, string> headers = new Dictionary<string, string>() { };
-          
+
             headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
 
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Assert.Equal(HttpStatusCode.OK, HttpSingleton.Instance.Get(TestStaticString._getLegalUrl, headers).code);
             }
@@ -64,7 +64,7 @@ namespace ZENSURE.Logsystem.Test
             headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
 
             var (timestamp, sign) = StringExpand.GetTimestampAndSign();
-  
+
             headers.Add("Sign", sign);
             headers.Add("Timestamp", timestamp);
 
@@ -86,7 +86,7 @@ namespace ZENSURE.Logsystem.Test
             headers.Add("Sign", sign);
             headers.Add("Timestamp", timestamp);
 
-            for (var i = 0; i < 10000; i++)
+            for (var i = 0; i < 10; i++)
             {
                 Assert.Equal(HttpStatusCode.OK, HttpSingleton.Instance.Post(TestStaticString._postLegalUrl, TestStaticString._jsonData, headers).code);
             }
@@ -98,15 +98,6 @@ namespace ZENSURE.Logsystem.Test
         [Fact]
         public void TEST_HTTP_POST_SEND_SYS_LOG_BY_LEGAL_URL()
         {
-            Dictionary<string, string> headers = new Dictionary<string, string>() { };
-
-            headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
-
-            var (timestamp, sign) = StringExpand.GetTimestampAndSign();
-
-            headers.Add("Sign", sign);
-            headers.Add("Timestamp", timestamp);
-
             var model = new SystemLogModel
             {
                 Source = "zlead",
@@ -121,7 +112,7 @@ namespace ZENSURE.Logsystem.Test
                 Message = "这是测试数据2003"
             };
 
-            Assert.Equal(HttpStatusCode.OK, HttpSingleton.Instance.PostSendSystemLog(TestStaticString._postLegalUrl, model, headers).code);
+            Assert.Equal(HttpStatusCode.OK, HttpSingleton.Instance.PostSendLog(TestStaticString._postLegalUrl, model).code);
         }
     }
 }

@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using ZENSURE.Logsystem.Model;
 using Newtonsoft.Json;
-using ZENSURE.LogSystem.Model;
 using ZENSURE.Logsystem.Const;
 using ZENSURE.Logsystem.Utils;
 
@@ -90,22 +89,20 @@ namespace ZENSURE.Logsystem
         /// </summary>
         /// <param name="url">Request Url String</param>
         /// <param name="model">Request Post Data</param>
-        /// <param name="headers">Request Headers</param>
-        /// <param name="contentType">Request Content Type</param>
-        /// <param name="timeOut">Request Time Out</param>
         /// <returns>(result:Is legal result,code:HttpStatusCode,errorMsg:If there are errors,the error msg is returned)</returns>
         /// <returns></returns>
-        public (string result, HttpStatusCode code, string errorMsg) PostSendLog<T>(string url, T model, string appkey) where T : class
+        public (string result, HttpStatusCode code, string errorMsg) PostSendLog<T>(string url, T model) where T : BaseLogModel
         {
-            if (string.IsNullOrWhiteSpace(appkey))
+            if (string.IsNullOrWhiteSpace(model.Source))
             {
                 return (string.Empty, HttpStatusCode.BadRequest, @"The input parameter ""appkey"" is not allowed to be null");
             }
 
             Dictionary<string, string> headers = new Dictionary<string, string>() { };
 
-            var (timestamp, sign) = GetTimestampAndSign(appkey);
+            var (timestamp, sign) = GetTimestampAndSign(model.Source);
 
+            headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
             headers.Add("Sign", sign);
             headers.Add("Timestamp", timestamp);
 
@@ -137,6 +134,9 @@ namespace ZENSURE.Logsystem
         {
             if (headers != null)
             {
+                //清空所有header内容
+                _httpClient.DefaultRequestHeaders.Clear();
+
                 foreach (var header in headers)
                 {
                     _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);

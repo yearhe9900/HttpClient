@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZENSURE.LogSystem.Enums
+namespace ZENSURE.Logsystem.Enums
 {
     /// <summary>
     /// Log Type
