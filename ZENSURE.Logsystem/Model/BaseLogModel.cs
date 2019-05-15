@@ -50,7 +50,6 @@ namespace ZENSURE.Logsystem.Model
         /// </summary>
         public ModeEnum Mode { get; set; }
 
-
         /// <summary>
         /// Request Date
         /// </summary>

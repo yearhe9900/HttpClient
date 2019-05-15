@@ -9,13 +9,13 @@ using System.Net.Http.Headers;
 using ZENSURE.Logsystem.Model;
 using Newtonsoft.Json;
 using ZENSURE.LogSystem.Model;
+using ZENSURE.Logsystem.Const;
 
 namespace ZENSURE.Logsystem
 {
     public class HttpSingleton
     {
         private static HttpClient _httpClient = null;
-        private static List<string> _contentTypeList = null;
 
         private HttpSingleton()
         {
@@ -94,25 +94,25 @@ namespace ZENSURE.Logsystem
         /// <param name="timeOut">Request Time Out</param>
         /// <returns>(result:Is legal result,code:HttpStatusCode,errorMsg:If there are errors,the error msg is returned)</returns>
         /// <returns></returns>
-        public (string result, HttpStatusCode code, string errorMsg) PostSendSystemLog(string url, SystemLogModel model, Dictionary<string, string> headers = null, string contentType = null, int timeOut = 0)
+        public (string result, HttpStatusCode code, string errorMsg) PostSendLog<T>(string url, T model, Dictionary<string, string> headers = null, int timeOut = 0) where T : class
         {
-            return Post(url, JsonConvert.SerializeObject(model ?? new SystemLogModel()), headers, contentType, timeOut);
+            return Post(url, JsonConvert.SerializeObject(model), headers, ContentTypeConst.JSON, timeOut);
         }
 
-        /// <summary>
-        /// Post Send Interface Log
-        /// </summary>
-        /// <param name="url">Request Url String</param>
-        /// <param name="model">Request Post Data</param>
-        /// <param name="headers">Request Headers</param>
-        /// <param name="contentType">Request Content Type</param>
-        /// <param name="timeOut">Request Time Out</param>
-        /// <returns>(result:Is legal result,code:HttpStatusCode,errorMsg:If there are errors,the error msg is returned)</returns>
-        /// <returns></returns>
-        public (string result, HttpStatusCode code, string errorMsg) PostSendInterfaceLog(string url, InterfaceLogModel model, Dictionary<string, string> headers = null, string contentType = null, int timeOut = 0)
-        {
-            return Post(url, JsonConvert.SerializeObject(model ?? new InterfaceLogModel()), headers, contentType, timeOut);
-        }
+        ///// <summary>
+        ///// Post Send Interface Log
+        ///// </summary>
+        ///// <param name="url">Request Url String</param>
+        ///// <param name="model">Request Post Data</param>
+        ///// <param name="headers">Request Headers</param>
+        ///// <param name="contentType">Request Content Type</param>
+        ///// <param name="timeOut">Request Time Out</param>
+        ///// <returns>(result:Is legal result,code:HttpStatusCode,errorMsg:If there are errors,the error msg is returned)</returns>
+        ///// <returns></returns>
+        //public (string result, HttpStatusCode code, string errorMsg) PostSendInterfaceLog(string url, InterfaceLogModel model, Dictionary<string, string> headers = null, string contentType = null, int timeOut = 0)
+        //{
+        //    return Post(url, JsonConvert.SerializeObject(model ?? new InterfaceLogModel()), headers, contentType, timeOut);
+        //}
 
         #region Privite Function
 

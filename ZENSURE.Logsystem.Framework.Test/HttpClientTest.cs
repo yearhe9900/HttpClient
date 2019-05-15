@@ -117,7 +117,7 @@ namespace ZENSURE.Logsystem.Framework.Test
                 Message = "这是测试数据02"
             };
 
-            Assert.AreEqual(HttpStatusCode.OK, HttpSingleton.Instance.PostSendSystemLog(TestStaticString._postLegalUrl, model, headers).code);
+            Assert.AreEqual(HttpStatusCode.OK, HttpSingleton.Instance.PostSendLog(TestStaticString._postLegalUrl, model, headers).code);
         }
     }
 }
