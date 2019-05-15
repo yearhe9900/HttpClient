@@ -94,15 +94,6 @@ namespace ZENSURE.Logsystem.Framework.Test
         [TestMethod]
         public void TEST_HTTP_POST_SEND_SYS_LOG_BY_LEGAL_URL()
         {
-            Dictionary<string, string> headers = new Dictionary<string, string>() { };
-
-            headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36");
-
-            var (timestamp, sign) = StringExpand.GetTimestampAndSign();
-
-            headers.Add("Sign", sign);
-            headers.Add("Timestamp", timestamp);
-
             var model = new SystemLogModel
             {
                 Source = "zlead",
@@ -117,7 +108,7 @@ namespace ZENSURE.Logsystem.Framework.Test
                 Message = "这是测试数据02"
             };
 
-            Assert.AreEqual(HttpStatusCode.OK, HttpSingleton.Instance.PostSendLog(TestStaticString._postLegalUrl, model, headers).code);
+            Assert.AreEqual(HttpStatusCode.OK, HttpSingleton.Instance.PostSendLog(TestStaticString._postLegalUrl, model,"zlead").code);
         }
     }
 }

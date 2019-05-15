@@ -10,6 +10,7 @@ using ZENSURE.Logsystem.Model;
 using Newtonsoft.Json;
 using ZENSURE.LogSystem.Model;
 using ZENSURE.Logsystem.Const;
+using ZENSURE.Logsystem.Utils;
 
 namespace ZENSURE.Logsystem
 {
@@ -94,9 +95,21 @@ namespace ZENSURE.Logsystem
         /// <param name="timeOut">Request Time Out</param>
         /// <returns>(result:Is legal result,code:HttpStatusCode,errorMsg:If there are errors,the error msg is returned)</returns>
         /// <returns></returns>
-        public (string result, HttpStatusCode code, string errorMsg) PostSendLog<T>(string url, T model, Dictionary<string, string> headers = null, int timeOut = 0) where T : class
+        public (string result, HttpStatusCode code, string errorMsg) PostSendLog<T>(string url, T model, string appkey) where T : class
         {
-            return Post(url, JsonConvert.SerializeObject(model), headers, ContentTypeConst.JSON, timeOut);
+            if (string.IsNullOrWhiteSpace(appkey))
+            {
+                return (string.Empty, HttpStatusCode.BadRequest, @"The input parameter ""appkey"" is not allowed to be null");
+            }
+
+            Dictionary<string, string> headers = new Dictionary<string, string>() { };
+
+            var (timestamp, sign) = GetTimestampAndSign(appkey);
+
+            headers.Add("Sign", sign);
+            headers.Add("Timestamp", timestamp);
+
+            return Post(url, JsonConvert.SerializeObject(model), headers);
         }
 
         ///// <summary>
@@ -181,6 +194,18 @@ namespace ZENSURE.Logsystem
             }
         }
 
+        /// <summary>
+        /// Get Timestamp And Sign
+        /// </summary>
+        /// <returns></returns>
+        private (string timestamp, string sign) GetTimestampAndSign(string appkey)
+        {
+            var epoch = TimestampHelper.GetUnixTimeStampByDatetime(DateTime.Now.ToUniversalTime());
+
+            var sign = MD5Helper.StrToMD5With32(epoch + appkey);
+
+            return (epoch.ToString(), sign);
+        }
         #endregion
     }
 }
